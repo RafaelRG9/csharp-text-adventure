@@ -1,0 +1,15 @@
+/workspaces/csharp-text-adventure/bin/Debug/net8.0/csharp-text-adventure
+/workspaces/csharp-text-adventure/bin/Debug/net8.0/csharp-text-adventure.deps.json
+/workspaces/csharp-text-adventure/bin/Debug/net8.0/csharp-text-adventure.runtimeconfig.json
+/workspaces/csharp-text-adventure/bin/Debug/net8.0/csharp-text-adventure.dll
+/workspaces/csharp-text-adventure/bin/Debug/net8.0/csharp-text-adventure.pdb
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.AssemblyInfoInputs.cache
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.AssemblyInfo.cs
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.csproj.CoreCompileInputs.cache
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.sourcelink.json
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.dll
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/refint/csharp-text-adventure.dll
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.pdb
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/csharp-text-adventure.genruntimeconfig.cache
+/workspaces/csharp-text-adventure/obj/Debug/net8.0/ref/csharp-text-adventure.dll
