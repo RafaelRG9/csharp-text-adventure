@@ -90,6 +90,6 @@ while (true)
     else
     {
         Console.WriteLine("Invalid direction. Please enter north, south, east, or west.");
-        continue; // Restart the loop
+        continue; // Restart the loop.
     }
 }
