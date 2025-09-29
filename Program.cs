@@ -4,28 +4,11 @@ World gameWorld = new World();
 // --- Player Creation ---
 // Create a new player and place them in the starting room
 Player player = new Player(gameWorld.Rooms[0]);
+DescribeRoom(player);
 
 // --- Game Loop ---
 while (true)
 {
-    // Describe the current room at the start of every turn.
-    Console.WriteLine($"\nYou are in: {player.CurrentRoom.Name}");
-    Console.WriteLine(player.CurrentRoom.Description);
-
-    //Check for items in the room
-    if (player.CurrentRoom.ItemsInRoom.Count > 0)
-    {
-        Console.WriteLine($"After carefully inspecting the room you find:");
-        Console.WriteLine("");
-        foreach (Item item in player.CurrentRoom.ItemsInRoom)
-        {
-            Console.WriteLine(item.Name);
-            Console.WriteLine(item.Description);
-            Console.WriteLine("");
-
-        }
-    }
-
     // Ask for a command
     Console.WriteLine("Where do you go or what do you do?");
     Console.Write("> ");
@@ -36,6 +19,7 @@ while (true)
     if (string.IsNullOrEmpty(playerAction))
     {
         Console.WriteLine("Please enter a command.");
+        Console.WriteLine("> ");
         continue;
     }
     string[] words = playerAction.ToLower().Split(' ');
@@ -54,40 +38,48 @@ while (true)
                     if (player.CurrentRoom.North != null)
                     {
                         player.CurrentRoom = player.CurrentRoom.North;
+                        DescribeRoom(player);
                     }
                     else
                     {
                         Console.WriteLine("There is no exit to the north.");
+                        Console.WriteLine("");
                     }
                     break;
                 case "south":
                     if (player.CurrentRoom.South != null)
                     {
                         player.CurrentRoom = player.CurrentRoom.South;
+                        DescribeRoom(player);
                     }
                     else
                     {
                         Console.WriteLine("There is no exit to the south.");
+                        Console.WriteLine("");
                     }
                     break;
                 case "east":
                     if (player.CurrentRoom.East != null)
                     {
                         player.CurrentRoom = player.CurrentRoom.East;
+                        DescribeRoom(player);
                     }
                     else
                     {
                         Console.WriteLine("There is no exit to the east.");
+                        Console.WriteLine("");
                     }
                     break;
                 case "west":
                     if (player.CurrentRoom.West != null)
                     {
                         player.CurrentRoom = player.CurrentRoom.West;
+                        DescribeRoom(player);
                     }
                     else
                     {
                         Console.WriteLine("There is no exit to the west.");
+                        Console.WriteLine("");
                     }
                     break;
             }
@@ -104,10 +96,12 @@ while (true)
                     player.CurrentRoom.ItemsInRoom.Remove(itemToTake);
                     player.Inventory.Add(itemToTake);
                     Console.WriteLine($"You took the {itemToTake.Name}.");
+                    Console.WriteLine("");
                 }
                 else
                 {
                     Console.WriteLine("That item is not in this room.");
+                    Console.WriteLine("");
                 }
             }
             else
@@ -129,15 +123,40 @@ while (true)
                     Console.WriteLine(item.Name);
                     Console.WriteLine(item.Description);
                 }
+                Console.WriteLine("");
             }
             else
             {
                 Console.WriteLine("Inventory is empty!");
+                Console.WriteLine("");
             }
             break;
+
+        // Look Command
+        case "look":
+        case "l":
+        DescribeRoom(player);
+        break;
 
         default:
             Console.WriteLine("I don't understand that command.");
             break;
+    }
+}
+
+void DescribeRoom(Player player)
+{
+    Console.WriteLine($"\nYou are in: {player.CurrentRoom.Name}");
+    Console.WriteLine(player.CurrentRoom.Description);
+
+    // Check for items in the room
+    if (player.CurrentRoom.ItemsInRoom.Count > 0)
+    {
+        Console.WriteLine("After carefully inspecting the room you find:");
+        foreach (Item item in player.CurrentRoom.ItemsInRoom)
+        {
+            Console.WriteLine($"- {item.Name}");
+        }
+        Console.WriteLine("");
     }
 }
