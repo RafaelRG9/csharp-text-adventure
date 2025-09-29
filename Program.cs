@@ -27,91 +27,117 @@ while (true)
     }
 
     // Ask for a command
-    Console.WriteLine("Where do you want to go?");
+    Console.WriteLine("Where do you go or what do you do?");
     Console.Write("> ");
 
-    // Read and validate the user's input
+    // Read and split input to extract commands
     var playerAction = Console.ReadLine();
 
-    // Check for a valid input
     if (string.IsNullOrEmpty(playerAction))
     {
-        Console.WriteLine("Please enter a direction.");
-        continue; // Restart the loop
+        Console.WriteLine("Please enter a command.");
+        continue;
     }
+    string[] words = playerAction.ToLower().Split(' ');
+    string verb = words[0];
 
-    if (playerAction.Equals("north", StringComparison.OrdinalIgnoreCase) ||
-        playerAction.Equals("south", StringComparison.OrdinalIgnoreCase) ||
-        playerAction.Equals("east", StringComparison.OrdinalIgnoreCase) ||
-        playerAction.Equals("west", StringComparison.OrdinalIgnoreCase))
+    switch (verb)
     {
-        // Move player based on choice
-        switch (playerAction.ToLower())
-        {
-            case "north":
-                if (player.CurrentRoom.North != null)
+        // Where to go to
+        case "north":
+        case "south":
+        case "east":
+        case "west":
+            switch (verb)
+            {
+                case "north":
+                    if (player.CurrentRoom.North != null)
+                    {
+                        player.CurrentRoom = player.CurrentRoom.North;
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no exit to the north.");
+                    }
+                    break;
+                case "south":
+                    if (player.CurrentRoom.South != null)
+                    {
+                        player.CurrentRoom = player.CurrentRoom.South;
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no exit to the south.");
+                    }
+                    break;
+                case "east":
+                    if (player.CurrentRoom.East != null)
+                    {
+                        player.CurrentRoom = player.CurrentRoom.East;
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no exit to the east.");
+                    }
+                    break;
+                case "west":
+                    if (player.CurrentRoom.West != null)
+                    {
+                        player.CurrentRoom = player.CurrentRoom.West;
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no exit to the west.");
+                    }
+                    break;
+            }
+            break;
+
+        // Taking items
+        case "take":
+            if (words.Length > 1)
+            {
+                string itemToTakeName = string.Join(" ", words.Skip(1));
+                Item? itemToTake = player.CurrentRoom.ItemsInRoom.Find(item => item.Name.Equals(itemToTakeName, StringComparison.OrdinalIgnoreCase));
+                if (itemToTake != null)
                 {
-                    player.CurrentRoom = player.CurrentRoom.North;
+                    player.CurrentRoom.ItemsInRoom.Remove(itemToTake);
+                    player.Inventory.Add(itemToTake);
+                    Console.WriteLine($"You took the {itemToTake.Name}.");
                 }
                 else
                 {
-                    Console.WriteLine("There is no exit to the north.");
+                    Console.WriteLine("That item is not in this room.");
                 }
-                break;
+            }
+            else
+            {
+                Console.WriteLine("What do you want to take?");
+            }
+            break;
 
-            case "south":
-                if (player.CurrentRoom.South != null)
-                {
-                    player.CurrentRoom = player.CurrentRoom.South;
-                }
-                else
-                {
-                    Console.WriteLine("There is no exit to the south.");
-                }
-                break;
+        // Open Inventory
+        case "inventory":
+        case "i":
+            if (player.Inventory.Count > 0)
+            {
+                Console.WriteLine("Inventory: ");
+                Console.WriteLine("");
 
-            case "east":
-                if (player.CurrentRoom.East != null)
+                foreach (Item item in player.Inventory)
                 {
-                    player.CurrentRoom = player.CurrentRoom.East;
+                    Console.WriteLine(item.Name);
+                    Console.WriteLine(item.Description);
                 }
-                else
-                {
-                    Console.WriteLine("There is no exit to the east.");
-                }
-                break;
+            }
+            else
+            {
+                Console.WriteLine("Inventory is empty!");
+            }
+            break;
 
-            case "west":
-                if (player.CurrentRoom.West != null)
-                {
-                    player.CurrentRoom = player.CurrentRoom.West;
-                }
-                else
-                {
-                    Console.WriteLine("There is no exit to the west.");
-                }
-                break;
-        }
-    }
-    else if (playerAction.StartsWith("take ", StringComparison.OrdinalIgnoreCase))
-    {
-        string itemToTakeName = playerAction.Substring(5);
-        Item? itemToTake = player.CurrentRoom.ItemsInRoom.Find(item => item.Name.Equals(itemToTakeName, StringComparison.OrdinalIgnoreCase));
-
-        if (itemToTake != null)
-        {
-            player.CurrentRoom.ItemsInRoom.Remove(itemToTake);
-            player.Inventory.Add(itemToTake);
-            Console.WriteLine($"You took the {itemToTake.Name}.");
-        }
-        else
-        {
-            Console.WriteLine("That item is not in this room.");
-        }
-    }
-    else
-    {
-        Console.WriteLine("Invalid direction. Please enter north, south, east, or west.");
-        continue; // Restart the loop.
+        default:
+            Console.WriteLine("I don't understand that command.");
+            break;
     }
 }
