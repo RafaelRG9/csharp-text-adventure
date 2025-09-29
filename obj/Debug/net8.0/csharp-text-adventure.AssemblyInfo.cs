@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("csharp-text-adventure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7053b5a78d39705889ecb8f0d6783a71d7452296")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09cb6c5a7c87a0bee0e7ee93d4120a7dcbfd0204")]
 [assembly: System.Reflection.AssemblyProductAttribute("csharp-text-adventure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("csharp-text-adventure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

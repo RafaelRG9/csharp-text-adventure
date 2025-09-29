@@ -6,11 +6,13 @@ public class Room
     public Room? South { get; set; }
     public Room? East { get; set; }
     public Room? West { get; set; }
+    public List<Item> ItemsInRoom;
 
     // Constructor
     public Room(string name, string description)
     {
         Name = name;
         Description = description;
+        ItemsInRoom = new List<Item>();
     }
 }

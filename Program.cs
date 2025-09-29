@@ -12,6 +12,20 @@ while (true)
     Console.WriteLine($"\nYou are in: {player.CurrentRoom.Name}");
     Console.WriteLine(player.CurrentRoom.Description);
 
+    //Check for items in the room
+    if (player.CurrentRoom.ItemsInRoom.Count > 0)
+    {
+        Console.WriteLine($"After carefully inspecting the room you find:");
+        Console.WriteLine("");
+        foreach (Item item in player.CurrentRoom.ItemsInRoom)
+        {
+            Console.WriteLine(item.Name);
+            Console.WriteLine(item.Description);
+            Console.WriteLine("");
+
+        }
+    }
+
     // Ask for a command
     Console.WriteLine("Where do you want to go?");
     Console.Write("> ");
@@ -77,6 +91,22 @@ while (true)
                     Console.WriteLine("There is no exit to the west.");
                 }
                 break;
+        }
+    }
+    else if (playerAction.StartsWith("take ", StringComparison.OrdinalIgnoreCase))
+    {
+        string itemToTakeName = playerAction.Substring(5);
+        Item? itemToTake = player.CurrentRoom.ItemsInRoom.Find(item => item.Name.Equals(itemToTakeName, StringComparison.OrdinalIgnoreCase));
+
+        if (itemToTake != null)
+        {
+            player.CurrentRoom.ItemsInRoom.Remove(itemToTake);
+            player.Inventory.Add(itemToTake);
+            Console.WriteLine($"You took the {itemToTake.Name}.");
+        }
+        else
+        {
+            Console.WriteLine("That item is not in this room.");
         }
     }
     else

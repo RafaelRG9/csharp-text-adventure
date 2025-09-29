@@ -6,6 +6,16 @@ public class World
     // Method to create and populate a list of rooms with their connections
     private void CreateWorld()
     {
+        //Items
+        Item rustyKey = new Item("Rusty Key", "It's an old, heavy iron key, covered in rust.");
+        Item glowingPotion = new Item("Glowing Potion", "A small vial filled with a liquid that emits a soft, green light.");
+        Item oldSword = new Item("Old Sword", "An old looking sword, looks rusted but suriprinsingly sharp");
+        Item dustyTome = new Item("Dusty Tome", "This tome looks worn and covered in dust, but the edge glow with mystical light");
+        Item emptyBottle = new Item("Empty Bottle", "An ordinary looking empty flask, looks clean");
+        Item fadedShield = new Item("Faded Shield", "Old and sturdy, the family emblem is barely visible");
+        Item oldArmor = new Item("Old Armor", "Battle worn piece of heavy armor, it as seen better days but can still hold up");
+        Item manorMap = new Item("Manor Map", "A Map of the Manor, detailing all the different rooms and some secret passages");
+
         //Rooms
         Room entryHall = new Room("The Entry Hall",
                                     "You stand in a grand entry hall. A large wooden door is to the north.");
@@ -31,6 +41,16 @@ public class World
         Rooms.Add(library);
         Rooms.Add(alchemyLab);
         Rooms.Add(dustyArmory);
+
+        //Add Items to the rooms
+        alchemyLab.ItemsInRoom.Add(glowingPotion);
+        alchemyLab.ItemsInRoom.Add(emptyBottle);
+        dustyArmory.ItemsInRoom.Add(oldSword);
+        dustyArmory.ItemsInRoom.Add(fadedShield);
+        dustyArmory.ItemsInRoom.Add(oldArmor);
+        library.ItemsInRoom.Add(rustyKey);
+        library.ItemsInRoom.Add(dustyTome);
+        library.ItemsInRoom.Add(manorMap);
     }
 
     // Constructor
