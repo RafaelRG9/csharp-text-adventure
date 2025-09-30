@@ -135,12 +135,39 @@ while (true)
         // Look Command
         case "look":
         case "l":
-        DescribeRoom(player);
-        break;
+            DescribeRoom(player);
+            break;
+
+        // Drop Command
+        case "drop":
+            if (words.Length > 1)
+            {
+                string itemToDropName = string.Join(" ", words.Skip(1));
+                Item? itemToDrop = player.Inventory.Find(item => item.Name.Equals(itemToDropName, StringComparison.OrdinalIgnoreCase));
+                if (itemToDrop != null)
+                {
+                    player.Inventory.Remove(itemToDrop);
+                    player.CurrentRoom.ItemsInRoom.Add(itemToDrop);
+                    Console.WriteLine($"You dropped: {itemToDrop.Name}.");
+                    Console.WriteLine("");
+                }
+                else
+                {
+                    Console.WriteLine("That item is not in your inventory.");
+                    Console.WriteLine("");
+                }
+            }
+            else
+            {
+                Console.WriteLine("What do you want to drop?");
+            }
+            break;
 
         default:
             Console.WriteLine("I don't understand that command.");
             break;
+
+        
     }
 }
 
