@@ -25,6 +25,7 @@ while (true)
     string[] words = playerAction.ToLower().Split(' ');
     string verb = words[0];
 
+    // Commands
     switch (verb)
     {
         // Where to go to
@@ -59,10 +60,24 @@ while (true)
                     }
                     break;
                 case "east":
+                    if (player.CurrentRoom.Name == "The Entry Hall")
+                    {
+                        if (!player.Inventory.Any(item => item.Name == "Rusty Key"))
+                        {
+                            Console.WriteLine("The door to the east is locked.");
+                            break;
+                        }
+                        Console.WriteLine("You unlock the door with the rusty key and step outside.");
+                    }
                     if (player.CurrentRoom.East != null)
                     {
                         player.CurrentRoom = player.CurrentRoom.East;
                         DescribeRoom(player);
+                        if (player.CurrentRoom.Name == "Courtyard")
+                        {
+                            Console.WriteLine("\nCongratulations, you have escaped the manor!");
+                            Environment.Exit(0); // THIS ENDS THE GAME!
+                        }
                     }
                     else
                     {

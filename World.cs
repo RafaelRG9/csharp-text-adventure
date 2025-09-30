@@ -25,10 +25,11 @@ public class World
                                     "This small, stone chamber is thick with the smell of rust and ancient dust. Sunken armor stands lean against the walls, their surfaces coated in a fine grey powder. Racks that once held spears and swords are now mostly empty, draped in thick cobwebs. A sturdy wooden door leads west, and another to the south.");
         Room alchemyLab = new Room("The Alchemy Lab",
                                     "The air here hums with a low bubbling sound and smells sharply of strange herbs and ozone. Cluttered tables are covered with glass beakers, twisted distillation tubes, and bubbling vials of glowing liquid. A large, leather-bound book lies open on a lectern, its pages covered in cryptic symbols and astronomical charts. Doors are visible to the north and west.");
+        Room courtyard = new Room("Courtyard", "The fresh air hits you as you step into the manor's courtyard. You are free!");
 
         // Rooms connections
         entryHall.North = library;
-        entryHall.East = alchemyLab;
+        entryHall.East = courtyard;
         library.South = entryHall;
         library.East = dustyArmory;
         alchemyLab.West = entryHall;
@@ -41,14 +42,15 @@ public class World
         Rooms.Add(library);
         Rooms.Add(alchemyLab);
         Rooms.Add(dustyArmory);
+        Rooms.Add(courtyard);
 
         //Add Items to the rooms
         alchemyLab.ItemsInRoom.Add(glowingPotion);
         alchemyLab.ItemsInRoom.Add(emptyBottle);
+        alchemyLab.ItemsInRoom.Add(rustyKey);
         dustyArmory.ItemsInRoom.Add(oldSword);
         dustyArmory.ItemsInRoom.Add(fadedShield);
         dustyArmory.ItemsInRoom.Add(oldArmor);
-        library.ItemsInRoom.Add(rustyKey);
         library.ItemsInRoom.Add(dustyTome);
         library.ItemsInRoom.Add(manorMap);
     }
